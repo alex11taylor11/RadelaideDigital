@@ -1,0 +1,84 @@
+[
+  {
+    "date": "2026-10-29",
+    "category": "government",
+    "headline": "AI Royal Commission opens its first call for public submissions",
+    "summary": "South Australia's Royal Commission into Artificial Intelligence is asking the public, businesses and organisations for their views on the questions in its scoping paper. Community forums, surveys and industry roundtables are also planned.",
+    "source": "Royal Commission into AI",
+    "url": "https://www.royalcommissionai.sa.gov.au/"
+  },
+  {
+    "date": "2026-10-21",
+    "category": "health",
+    "headline": "Adults can now get specialist care through SA's Virtual Care Service",
+    "summary": "A roundup of what's changing in South Australian healthcare highlights that adults can receive specialist virtual care when appropriate, without a trip to the emergency department.",
+    "source": "The Post SA",
+    "url": "https://thepostsa.au/health/2026/10/21/whats-changing-in-sa-healthcare-right-now/"
+  },
+  {
+    "date": "2026-10-19",
+    "category": "health",
+    "headline": "Free 24/7 nurse-led health line expands across South Australia",
+    "summary": "The state is putting $5.6 million into the 1800MEDICARE line in 2026-27 to improve after-hours and regional access. Callers can be referred straight to the State Government's Virtual Care Service.",
+    "source": "Port Lincoln Times",
+    "url": "https://portlincolntimes.com.au/news/2026/10/19/access-to-24-7-telehealth-service-expanded/"
+  },
+  {
+    "date": "2026-10-06",
+    "category": "government",
+    "headline": "Mining regulation goes digital with new online system",
+    "summary": "DXC has finished delivering the Minerals and Energy Regulation System for the Department for Energy and Mining, replacing legacy systems and manual work with online licensing, compliance and royalty services.",
+    "source": "IT Brief Australia",
+    "url": "https://itbrief.com.au/story/dxc-completes-south-australia-mining-regulation-platform"
+  },
+  {
+    "date": "2026-10-01",
+    "category": "government",
+    "headline": "Royal Commission into AI begins work",
+    "summary": "Chaired by Dr Iain Ross AO, with commissioners Kate Pounder and Professor Christopher Manning, the inquiry will look at AI's impact on jobs, infrastructure and public services. Its final report is due by 1 July 2027.",
+    "source": "Office for AI",
+    "url": "https://www.ai.sa.gov.au/"
+  },
+  {
+    "date": "2026-10-01",
+    "date_label": "Oct 2026",
+    "category": "education",
+    "headline": "National AI-in-schools explainer lists SA's EdChat",
+    "summary": "A new explainer for policymakers from AERO, the national education evidence body, lists South Australia's homegrown EdChat among the AI platforms approved by state education departments.",
+    "source": "AERO",
+    "url": "https://www.edresearch.edu.au/sites/default/files/2026-10/aero-ai-in-schools-considerations-for-policymakers-aa.pdf"
+  },
+  {
+    "date": "2026-09-07",
+    "category": "cities",
+    "headline": "Nine councils, one shared network: Connected Cities Adelaide",
+    "summary": "Nine Adelaide councils share one open-access, low-power wireless sensor network covering more than half the metropolitan area. Each council gets its own data dashboard, with University of Adelaide rules on who can see what.",
+    "source": "Meshed",
+    "url": "https://www.meshed.network/resources/connected-cities-adelaide-lorawan/"
+  },
+  {
+    "date": "2026-08-25",
+    "category": "education",
+    "headline": "SA stands out by embracing AI in schools rather than banning it",
+    "summary": "As education departments around the country crack down on students using AI to cheat, South Australia remains the national outlier with its department-built EdChat tool in public schools.",
+    "source": "ABC News",
+    "url": "https://www.abc.net.au/news/2026-08-25/how-education-departments-across-country-are-cracking-down-on-ai/107026976"
+  },
+  {
+    "date": "2026-08-21",
+    "date_label": "17–21 Aug 2026",
+    "category": "business",
+    "headline": "Record turnout for Small Business Week, with AI front and centre",
+    "summary": "Small Business Week had its biggest year yet, with 1,482 registrations across about 40 metropolitan, regional and online events. AI and digital capability were key themes.",
+    "source": "Glam Adelaide",
+    "url": "https://glamadelaide.com.au/record-1500-sa-businesses-take-part-in-small-business-week/"
+  },
+  {
+    "date": "2026-08-10",
+    "category": "government",
+    "headline": "Premier announces nation-first Royal Commission into AI",
+    "summary": "Premier Peter Malinauskas announced Australia's first royal commission into artificial intelligence after a US trip meeting AI companies. The state also appointed a Minister for AI and the Digital Economy.",
+    "source": "Capital Brief",
+    "url": "https://www.capitalbrief.com/briefing/south-australian-government-launches-royal-commission-into-ai-fde82dd5-2ff8-4d17-8344-c0c787113e52/"
+  }
+]

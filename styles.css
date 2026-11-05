@@ -1,4 +1,4 @@
-/* The Byte Floater — shared styles */
+/* Radelaide.Digital — shared styles */
 :root {
   --bg: #0a0b0f;
   --panel: #12141b;
@@ -51,6 +51,7 @@ a { color: inherit; }
 .logo--sm { font-size: 24px; }
 .logo__the { font: 400 .45em var(--mono); color: var(--muted); vertical-align: middle; text-transform: uppercase; letter-spacing: .15em; }
 .logo__hi { color: var(--lime); font-style: italic; }
+.empty { color: var(--muted); font: 14px var(--mono); margin: 0; padding: 8px 0; }
 .motto { margin: 0; color: var(--muted); font: 13px var(--mono); }
 .nav { display: flex; gap: 4px; overflow-x: auto; padding-bottom: 12px; padding-top: 6px; scrollbar-width: none; }
 .nav::-webkit-scrollbar { display: none; }
