@@ -1,4 +1,4 @@
-/* The Silicon Croweater — shared styles */
+/* The Byte Floater — shared styles */
 :root {
   --bg: #0a0b0f;
   --panel: #12141b;
@@ -69,7 +69,8 @@ main { padding-top: 32px; padding-bottom: 56px; }
 .hero > .kicker { grid-column: 1 / -1; margin-bottom: -8px; }
 .hero__side { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; --accent: var(--magenta); }
 .hero__side p { color: var(--muted); margin: 0; }
-.big-stat { font-size: 96px; font-weight: 700; line-height: 1; color: var(--magenta) !important; margin: 4px 0 12px !important; letter-spacing: -.05em; }
+.hero__side a { color: var(--magenta); }
+.big-stat { font-size: clamp(64px, 9vw, 96px); font-weight: 700; line-height: 1; color: var(--magenta) !important; margin: 4px 0 12px !important; letter-spacing: -.05em; }
 
 /* Section titles */
 .section-title { font: 700 13px var(--mono); text-transform: uppercase; letter-spacing: .2em; color: var(--muted); display: flex; align-items: center; gap: 14px; margin: 48px 0 18px; }
