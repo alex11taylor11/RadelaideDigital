@@ -49,12 +49,29 @@ the `.html` files; edit the JSON and rebuild.
    If only the month is known, use the first of the month and add
    `"date_label": "Oct 2026"`. If the date is for an event, add a label like
    `"date_label": "17–21 Aug 2026"`.
+   Leave out the `photo` field: the build gives each new story an unused photo
+   from its category automatically (see "Photos" below).
 4. Remove entries older than 92 days from `data/stories.json` (the build hides
    them anyway, this just keeps the file tidy).
 5. Run `python3 scripts/build.py` from the repository root.
 6. Commit and push to `main`, even if there are no new stories (the "Last updated"
    date and the 3-month window still change). Use a message like
    `Morning refresh: 2 new stories`.
+
+## Photos
+
+- Photos live in `images/photos/` and are listed, with credits, in `data/photos.json`.
+  Each has a `category` (one of the five desks, or `banner` for the front-page banner).
+- The build never shows the same photo twice. If a desk's photos are all in use, a
+  new story is shown without a picture rather than repeating one.
+- If a desk has fewer than 2 unused photos, add more from Wikimedia Commons:
+  search with the Commons API (commons.wikimedia.org), and choose only real, landscape
+  photographs of South Australian places relevant to the desk, licensed CC0, public
+  domain, CC BY or CC BY-SA. Download the 960px thumbnail from **upload.wikimedia.org**
+  (thumb.wikimedia.org is blocked), look at it before using it, and skip anything that
+  looks like a photo already in the pool. Add an entry to `data/photos.json` with
+  `id`, `category`, `file`, `alt`, `title`, `page`, `author`, `license` and `license_url`.
+- Never use photos from news articles or other copyrighted sources.
 
 ## Rules
 

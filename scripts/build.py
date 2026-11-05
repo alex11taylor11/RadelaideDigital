@@ -28,6 +28,7 @@ CATS = [
      "Digital twins, sensors and data projects reshaping how Adelaide's councils work.", "#4dffb8"),
 ]
 CAT = {c[0]: c for c in CATS}
+PHOTOS, BANNER = {}, None
 e = html.escape
 
 
@@ -55,7 +56,50 @@ def load(now):
             s["_label"] = s.get("date_label") or nice(d)
             out.append(s)
     out.sort(key=lambda s: s["_d"], reverse=True)
-    return out
+    return stories, out
+
+
+def load_photos():
+    with open(os.path.join(ROOT, "data", "photos.json")) as f:
+        return {p["id"]: p for p in json.load(f)}
+
+
+def assign_photos(all_stories, shown, photos):
+    """Give every shown story its own photo; never show the same photo twice.
+
+    Stories keep a photo once given one (saved back to stories.json). A story
+    without a photo gets the first unused photo from its category's pool; if the
+    pool is used up it is shown without a picture rather than repeating one.
+    Returns the set of photo ids used on the site.
+    """
+    used = {pid for pid, p in photos.items() if p["category"] == "banner"}
+    changed = False
+    for s in sorted(shown, key=lambda s: s["_d"]):  # older stories keep priority
+        pid = s.get("photo")
+        if pid and (pid not in photos or pid in used):
+            print(f"WARNING: photo {pid!r} for '{s['headline']}' is unknown or already used; reassigning.")
+            pid = None
+        if not pid:
+            pid = next((i for i, p in photos.items() if p["category"] == s["category"] and i not in used), None)
+            if pid:
+                s["photo"] = pid
+            else:
+                s.pop("photo", None)
+                print(f"NOTE: no unused {s['category']} photo left for '{s['headline']}'; showing it without a picture.")
+            changed = True
+        if pid:
+            used.add(pid)
+    if changed:
+        clean = [{k: v for k, v in s.items() if not k.startswith("_")} for s in all_stories]
+        with open(os.path.join(ROOT, "data", "stories.json"), "w") as f:
+            json.dump(clean, f, indent=2, ensure_ascii=False)
+            f.write("\n")
+    return used
+
+
+def credit(p):
+    lic = f'<a href="{e(p["license_url"])}" target="_blank" rel="noopener">{e(p["license"])}</a>' if p.get("license_url") else e(p["license"])
+    return f'Photo: <a href="{e(p["page"])}" target="_blank" rel="noopener">{e(p["author"])}</a>, {lic}'
 
 
 def nav(active):
@@ -69,8 +113,15 @@ def nav(active):
 def card(s, big=False):
     c = CAT[s["category"]]
     url = e(s["url"])
-    return f"""<article class="card{' card--big' if big else ''}" style="--accent:{c[4]}">
-        <a class="card__art" href="{url}" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><img src="images/{c[0]}.svg" alt="" loading="lazy" width="400" height="225"></a>
+    p = PHOTOS.get(s.get("photo"))
+    art = ""
+    if p:
+        art = f"""<figure class="card__art">
+          <a href="{url}" target="_blank" rel="noopener" tabindex="-1"><img src="{e(p['file'])}" alt="{e(p['alt'])}" loading="lazy" width="960" height="540"></a>
+          <figcaption>{credit(p)}</figcaption>
+        </figure>"""
+    return f"""<article class="card{' card--big' if big else ''}{'' if p else ' card--noimg'}" style="--accent:{c[4]}">
+        {art}
         <div class="card__meta"><a class="tag" href="{c[0]}.html">{e(c[1])}</a><time datetime="{s['date']}">{e(s['_label'])}</time></div>
         <h3><a href="{url}" target="_blank" rel="noopener">{e(s['headline'])}</a></h3>
         <p>{e(s['summary'])}</p>
@@ -123,7 +174,7 @@ def page(active, title, desc, body, updated):
     <div class="wrap">
       <p class="logo logo--sm">{LOGO}</p>
       <p>An independent roundup of digital transformation news from Adelaide and South Australia. We show stories from the last three months, newest first. Each story is a short summary that links to the original reporting. Read the source for full details. Not affiliated with any organisation mentioned.</p>
-      <p class="mono">Last updated {nice(updated)}</p>
+      <p class="mono">Last updated {nice(updated)} &middot; <a href="credits.html">Photo credits</a></p>
     </div>
   </footer>
 </body>
@@ -156,8 +207,9 @@ def home(stories, updated):
     </div>
 """
     body = f"""    <div class="banner">
-      <img src="images/hero.svg" alt="Neon illustration of the Adelaide skyline at sunset, with the Adelaide Hills behind" width="1200" height="360">
+      <img src="{e(BANNER['file'])}" alt="{e(BANNER['alt'])}" width="960" height="540">
       <p class="banner__text">Digital transformation news from <span>the Festival State</span></p>
+      <p class="banner__credit">{credit(BANNER)}</p>
     </div>
     <section class="hero">
       <p class="kicker mono">// Top story</p>
@@ -191,9 +243,32 @@ def category(slug, stories, updated):
     return page(slug, name, f"{name} news from Adelaide and South Australia. {blurb}", body, updated)
 
 
+def credits_page(used, updated):
+    rows = "\n".join(
+        f"""      <li><img src="{e(p['file'])}" alt="" loading="lazy" width="160" height="90"><div><strong>{e(p['alt'])}</strong><br>{credit(p)}<br><span class="mono">{e(p['title'])}</span></div></li>"""
+        for i, p in PHOTOS.items() if i in used)
+    body = f"""    <section class="cat-head" style="--accent:#c6ff00">
+      <div>
+        <p class="kicker mono">// About</p>
+        <h1>Photo credits</h1>
+        <p>Photos are from Wikimedia Commons and used under the licences shown. Thank you to the photographers. Illustrations are original to this site.</p>
+      </div>
+    </section>
+    <ul class="credits">
+{rows}
+    </ul>"""
+    return page("credits", "Photo credits", "Photo credits for Radelaide.Digital.", body, updated)
+
+
 def main():
+    global PHOTOS, BANNER
     now = today()
-    stories = load(now)
+    all_stories, stories = load(now)
+    PHOTOS = load_photos()
+    BANNER = next(p for p in PHOTOS.values() if p["category"] == "banner")
+    used = assign_photos(all_stories, stories, PHOTOS)
+    with open(os.path.join(ROOT, "credits.html"), "w") as f:
+        f.write(credits_page(used, now))
     with open(os.path.join(ROOT, "index.html"), "w") as f:
         f.write(home(stories, now))
     for slug, *_ in CATS:
