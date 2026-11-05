@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 225" role="img">
+<defs>
+  <radialGradient id="g" cx="50%" cy="55%" r="65%"><stop offset="0" stop-color="#ffb300" stop-opacity=".28"/><stop offset="1" stop-color="#ffb300" stop-opacity="0"/></radialGradient>
+  <pattern id="p" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="#ffffff" stroke-opacity=".05"/></pattern>
+  <filter id="f" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<rect width="400" height="225" fill="#12141b"/><rect width="400" height="225" fill="url(#p)"/><rect width="400" height="225" fill="url(#g)"/>
+<g fill="#ffb300" fill-opacity=".14"><rect x="250" y="130" width="22" height="50" rx="2"/><rect x="280" y="108" width="22" height="72" rx="2"/><rect x="310" y="84" width="22" height="96" rx="2"/><rect x="340" y="56" width="22" height="124" rx="2"/></g>
+<path d="M240 140 L290 112 L318 120 L368 56" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" filter="url(#f)"/>
+<path d="M350 54 L370 52 L368 72" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<g fill="none" stroke="#ffb300" stroke-width="2.5" stroke-linejoin="round" filter="url(#f)">
+  <path d="M60 96 H200 L212 122 H48 Z"/>
+  <path d="M60 122 V180 H200 V122"/>
+  <rect x="76" y="136" width="44" height="30" rx="2"/>
+  <path d="M142 180 V136 H180 V180"/>
+  <path d="M30 180 H226"/>
+</g>
+<g fill="#ffb300"><path d="M48 122 L60 96 H83 L76 122 Z M104 122 L106 96 H129 L132 122 Z M160 122 L152 96 H175 L188 122 Z" fill-opacity=".55"/></g>
+<rect x="88" y="70" width="84" height="16" rx="3" fill="none" stroke="#ffb300" stroke-width="2"/>
+<text x="130" y="82" font-family="monospace" font-size="11" font-weight="700" fill="#ffb300" text-anchor="middle">OPEN 24/7</text>
+</svg>

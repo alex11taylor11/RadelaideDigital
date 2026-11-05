@@ -70,6 +70,7 @@ def card(s, big=False):
     c = CAT[s["category"]]
     url = e(s["url"])
     return f"""<article class="card{' card--big' if big else ''}" style="--accent:{c[4]}">
+        <a class="card__art" href="{url}" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><img src="images/{c[0]}.svg" alt="" loading="lazy" width="400" height="225"></a>
         <div class="card__meta"><a class="tag" href="{c[0]}.html">{e(c[1])}</a><time datetime="{s['date']}">{e(s['_label'])}</time></div>
         <h3><a href="{url}" target="_blank" rel="noopener">{e(s['headline'])}</a></h3>
         <p>{e(s['summary'])}</p>
@@ -142,6 +143,7 @@ def home(stories, updated):
             f'<li><a href="{e(s["url"])}" target="_blank" rel="noopener">{e(s["headline"])}</a><span>{e(s["_label"])}</span></li>'
             for s in items) or f"<li>{EMPTY}</li>"
         sections.append(f"""      <section class="desk" style="--accent:{color}">
+        <a class="desk__art" href="{slug}.html" tabindex="-1" aria-hidden="true"><img src="images/{slug}.svg" alt="" loading="lazy" width="400" height="225"></a>
         <h3><a href="{slug}.html">{e(name)} <span aria-hidden="true">&#8594;</span></a></h3>
         <p>{e(blurb)}</p>
         <ul>{lis}</ul>
@@ -153,7 +155,11 @@ def home(stories, updated):
       {"".join(card(s) for s in latest)}
     </div>
 """
-    body = f"""    <section class="hero">
+    body = f"""    <div class="banner">
+      <img src="images/hero.svg" alt="Neon illustration of the Adelaide skyline at sunset, with the Adelaide Hills behind" width="1200" height="360">
+      <p class="banner__text">Digital transformation news from <span>the Festival State</span></p>
+    </div>
+    <section class="hero">
       <p class="kicker mono">// Top story</p>
       {card(lead, big=True)}
       <aside class="hero__side">
@@ -174,9 +180,12 @@ def category(slug, stories, updated):
     items = [s for s in stories if s["category"] == slug]
     grid = f'<div class="grid">\n      {"".join(card(s) for s in items)}\n    </div>' if items else EMPTY
     body = f"""    <section class="cat-head" style="--accent:{color}">
-      <p class="kicker mono">// Desk</p>
-      <h1>{e(name)}</h1>
-      <p>{e(blurb)}</p>
+      <div>
+        <p class="kicker mono">// Desk</p>
+        <h1>{e(name)}</h1>
+        <p>{e(blurb)}</p>
+      </div>
+      <img class="cat-head__art" src="images/{slug}.svg" alt="" width="400" height="225">
     </section>
     {grid}"""
     return page(slug, name, f"{name} news from Adelaide and South Australia. {blurb}", body, updated)
